@@ -2,12 +2,15 @@ extends CharacterBody2D
 @onready var player: AnimatedSprite2D = $AnimatedSprite2D
 @onready var mining_area: TileMapLayer = get_tree().get_first_node_in_group("mining_area")
 @onready var rails_area: TileMapLayer = get_tree().get_first_node_in_group("rails_area")
+@onready var mining_progress_bar: ProgressBar = $ProgressBar
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -300.0
 
 var tiles_being_mined: Dictionary = {}
-var mining_timer = SceneTreeTimer
+
+func _ready() -> void:
+	mining_progress_bar.visible = false
 
 func _physics_process(delta: float) -> void:
 	
@@ -104,12 +107,26 @@ func _mine_block(tile_pos: Vector2i):
 	if not tile_data:
 		return
 		
+	mining_progress_bar.visible = true
+	mining_progress_bar.value = 100	
+		
 	tiles_being_mined[tile_pos] = true	
 		
 	var health = tile_data.get_custom_data("block_health")
 	var type = tile_data.get_custom_data("block_type")
 	
-	await get_tree().create_timer(float(health/10)).timeout
+	var steps = 20
+	
+	for i in range(steps):
+		await get_tree().create_timer((float(health)/10)/steps).timeout
+		
+		if player.animation != "mine_down" and player.animation != "mine_right":
+			mining_progress_bar.value = 0
+			mining_progress_bar.visible = false
+			tiles_being_mined.erase(tile_pos)
+			return
+			
+		mining_progress_bar.value = 100.0 * (1.0 - float(i + 1) / steps)
 	
 	if player.animation == "mine_down" or player.animation == "mine_right":
 		mining_area.erase_cell(tile_pos)

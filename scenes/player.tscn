@@ -384,3 +384,9 @@ frame_progress = 0.019686988
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1482356819]
 position = Vector2(1.5, 6)
 shape = SubResource("RectangleShape2D_hhpqf")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=221278403]
+offset_left = -15.0
+offset_top = -7.0
+offset_right = -11.0
+offset_bottom = 20.0
