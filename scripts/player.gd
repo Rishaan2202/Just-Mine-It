@@ -7,6 +7,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -300.0
 
+signal block_mined(type: String)
+
 var tiles_being_mined: Dictionary = {}
 
 func _ready() -> void:
@@ -131,6 +133,7 @@ func _mine_block(tile_pos: Vector2i):
 	if player.animation == "mine_down" or player.animation == "mine_right":
 		mining_area.erase_cell(tile_pos)
 		rails_area.set_cell(tile_pos, 0, Vector2i(2, 1))
+		block_mined.emit(type)
 		print("You mined a ", type, " block")
 		tiles_being_mined.erase(tile_pos)
 	else:

@@ -14,3 +14,107 @@ script = ExtResource("1_jyhfs")
 
 [node name="Player" parent="." unique_id=677466772 instance=ExtResource("2_sugp2")]
 position = Vector2(94, 131)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1550916437]
+
+[node name="ReservesContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1669092945]
+offset_left = 959.0
+offset_top = 113.0
+offset_right = 1127.0
+offset_bottom = 457.0
+
+[node name="Gravel" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=266212539]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, -120)
+text = "Gravel x 0"
+
+[node name="Dirt" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=696041400]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, -140)
+text = "Dirt x 0"
+
+[node name="Stone" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=733238604]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, -100)
+text = "Stone x 0"
+
+[node name="Copper Ore" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=1439402262]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, -50)
+text = "Copper Ore x 0"
+
+[node name="Silver Ore" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=636339137]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, -30)
+text = "Silver Ore x 0"
+
+[node name="Gold Ore" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=348725602]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, -10)
+text = "Gold Ore x 0"
+
+[node name="Diamond Ore" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=1595793623]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 10)
+text = "Diamond Ore x 0"
+
+[node name="Copper" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=1020374811]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 60)
+text = "Copper x 0"
+
+[node name="Silver" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=2118831578]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 80)
+text = "Silver x 0"
+
+[node name="Gold" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=722217047]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 100)
+text = "Gold x 0"
+
+[node name="Diamond" type="Label" parent="CanvasLayer/ReservesContainer" unique_id=509528870]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 120)
+text = "Diamond x 0"
+
+[node name="MoneyContainer" type="PanelContainer" parent="CanvasLayer" unique_id=350559736]
+offset_left = 962.0
+offset_top = 12.0
+offset_right = 1079.0
+offset_bottom = 52.0
+
+[node name="Label" type="Label" parent="CanvasLayer/MoneyContainer" unique_id=265043658]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 0)
+text = "$0"
+
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=1022351667]
+process_mode = 3
+offset_left = 1087.0
+offset_top = 12.0
+offset_right = 1129.0
+offset_bottom = 52.0
+text = "||"
+
+[node name="ShowReservesButton" type="Button" parent="CanvasLayer" unique_id=1460383425]
+offset_left = 961.0
+offset_top = 66.0
+offset_right = 1129.0
+offset_bottom = 103.0
+text = "Show Reserves  V"
+
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowReservesButton" to="." method="_on_show_reserves_button_pressed"]
