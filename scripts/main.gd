@@ -4,6 +4,13 @@ extends Node2D
 @onready var money_container: PanelContainer = $CanvasLayer/MoneyContainer
 @onready var show_reserves_button: Button = $CanvasLayer/ShowReservesButton
 @onready var pause_button: Button = $CanvasLayer/PauseButton
+@onready var pause_container: PanelContainer = $CanvasLayer/PauseContainer
+@onready var continue_button: Button = $CanvasLayer/ContinueButton
+@onready var restart_button: Button = $CanvasLayer/RestartButton
+@onready var crusher_container: PanelContainer = $CanvasLayer/CrusherContainer
+@onready var sell_button: Button = $CanvasLayer/SellButton
+@onready var back_button: Button = $CanvasLayer/BackButton
+@onready var money_bar: Label = $CanvasLayer/MoneyContainer/MoneyBar
 
 # ---- Reserves Display Elements ---- 
 
@@ -25,31 +32,32 @@ extends Node2D
 var pause_button_press_count = 0
 var show_reserves_button_press_count = 0
 
+# --- Money Variables --- #
+
+var balance: int = 0
+var disguised_balance: int = 0
+
 # --- Mineral Variables --- #
+
 var dirt_amount = 0
-
 var gravel_amount = 0
-
 var stone_amount = 0
 
 var copper_ore_amount = 0
-var copper_metal_amount = 0
-
 var silver_ore_amount = 0
-var silver_metal_amount = 0
-
 var gold_ore_amount = 0
-var gold_metal_amount = 0
-
 var diamond_ore_amount = 0
-var diamond_metal_amount = 0
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reserves_container.visible = false
+	pause_container.visible = false
+	continue_button.visible = false
+	restart_button.visible = false
+	crusher_container.visible = false
+	sell_button.visible = false
+	back_button.visible = false
 	var block = player.block_mined.connect(_on_block_mined)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -77,11 +85,15 @@ func _on_block_mined(type: String) -> void:
 	elif type == "diamond":
 		diamond_ore_amount += 1
 		diamond_ore.text = "Diamond x %s" % diamond_ore_amount
+	disguised_balance = (5 * dirt_amount) + (10 * gravel_amount) + (30 * stone_amount) + (75 * copper_ore_amount) + (150 * silver_ore_amount) + (750 * gold_ore_amount) + (1500 * diamond_ore_amount)
+	sell_button.text = "Sell for $%s" % disguised_balance	
 
 func _on_pause_button_pressed() -> void:
 	pause_button.text = ">"
 	get_tree().paused = not get_tree().paused
-
+	pause_container.visible = true
+	continue_button.visible = true
+	restart_button.visible = true
 
 func _on_show_reserves_button_pressed() -> void:
 	show_reserves_button_press_count += 1
@@ -92,3 +104,43 @@ func _on_show_reserves_button_pressed() -> void:
 	else:
 		reserves_container.visible = false
 		show_reserves_button.text = "Show Reserves V"
+
+
+func _on_continue_button_pressed() -> void:
+	get_tree().paused = false
+	pause_container.visible = false
+	continue_button.visible = false
+	restart_button.visible = false
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
+
+
+func _on_crusher_entered(body: Node2D) -> void:
+	crusher_container.visible = true
+	sell_button.visible = true
+	back_button.visible = true
+
+
+func _on_back_button_pressed() -> void:
+	crusher_container.visible = false
+	sell_button.visible = false
+	back_button.visible = false
+
+
+func _on_sell_button_pressed() -> void:
+	balance += disguised_balance
+	
+	dirt_amount = 0
+	gravel_amount = 0
+	stone_amount = 0
+	copper_ore_amount = 0
+	silver_ore_amount = 0
+	gold_ore_amount = 0
+	diamond_ore_amount = 0
+	
+	disguised_balance = 0
+	
+	sell_button.text = "Sell for $0"
+	money_bar.text = "$%s" % balance

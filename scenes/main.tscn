@@ -4,9 +4,19 @@
 [ext_resource type="Script" uid="uid://3fpackqpk5cm" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cffgww5ma5euv" path="res://scenes/rails_area.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://e5jes2b0rwwh" path="res://scenes/player.tscn" id="2_sugp2"]
+[ext_resource type="Texture2D" uid="uid://2wemyv0rdes5" path="res://assets/Background/Background.png" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://crvql0hmsgupk" path="res://assets/Outdoor decoration/ore-crusher-machine-6cd7.png" id="6_tefeu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uhwc"]
+size = Vector2(122, 108)
 
 [node name="Main" type="Node2D" unique_id=1478286394]
 script = ExtResource("1_jyhfs")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=173933651]
+position = Vector2(577.99994, 62.5)
+scale = Vector2(0.8635681, 0.97466666)
+texture = ExtResource("2_tbgi4")
 
 [node name="TileMapLayer2" parent="." unique_id=1194035583 instance=ExtResource("1_sugp2")]
 
@@ -95,7 +105,7 @@ offset_top = 12.0
 offset_right = 1079.0
 offset_bottom = 52.0
 
-[node name="Label" type="Label" parent="CanvasLayer/MoneyContainer" unique_id=265043658]
+[node name="MoneyBar" type="Label" parent="CanvasLayer/MoneyContainer" unique_id=265043658]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(20, 0)
@@ -116,5 +126,97 @@ offset_right = 1129.0
 offset_bottom = 103.0
 text = "Show Reserves  V"
 
+[node name="CrusherContainer" type="PanelContainer" parent="CanvasLayer" unique_id=847717338]
+offset_left = 255.0
+offset_top = 108.0
+offset_right = 897.0
+offset_bottom = 519.0
+
+[node name="Label" type="Label" parent="CanvasLayer/CrusherContainer" unique_id=292217769]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -50)
+theme_override_font_sizes/font_size = 64
+text = "Crusher"
+horizontal_alignment = 1
+
+[node name="SellButton" type="Button" parent="CanvasLayer" unique_id=935454673]
+process_mode = 3
+offset_left = 549.0
+offset_top = 307.0
+offset_right = 715.0
+offset_bottom = 356.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(30, 0)
+text = "Sell for $0"
+
+[node name="BackButton" type="Button" parent="CanvasLayer" unique_id=1410962240]
+process_mode = 3
+offset_left = 369.0
+offset_top = 306.0
+offset_right = 535.0
+offset_bottom = 355.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(30, 0)
+text = "< Back"
+
+[node name="PauseContainer" type="PanelContainer" parent="CanvasLayer" unique_id=836351411]
+offset_left = 255.0
+offset_top = 108.0
+offset_right = 897.0
+offset_bottom = 519.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseContainer" unique_id=1610418648]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -50)
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer" unique_id=189245879]
+process_mode = 3
+offset_left = 549.0
+offset_top = 307.0
+offset_right = 715.0
+offset_bottom = 356.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(30, 0)
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer" unique_id=1873802924]
+process_mode = 3
+offset_left = 369.0
+offset_top = 306.0
+offset_right = 535.0
+offset_bottom = 355.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(30, 0)
+text = "Restart"
+
+[node name="Crusher" type="Area2D" parent="." unique_id=208957391]
+
+[node name="Sprite2D" type="Sprite2D" parent="Crusher" unique_id=2144792614]
+texture_filter = 1
+position = Vector2(1054.9999, 141)
+scale = Vector2(2.4375, 2.1250002)
+texture = ExtResource("6_tefeu")
+
+[node name="Label" type="Label" parent="Crusher" unique_id=932435160]
+offset_left = 1031.0
+offset_top = 56.0
+offset_right = 1093.0
+offset_bottom = 79.0
+text = "Crusher"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crusher" unique_id=629799275]
+position = Vector2(1057, 137)
+shape = SubResource("RectangleShape2D_3uhwc")
+
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShowReservesButton" to="." method="_on_show_reserves_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="body_entered" from="Crusher" to="." method="_on_crusher_entered"]
