@@ -52,6 +52,11 @@
 	</ul>
 <br>
 <br>
+<h1>Overall Look</h1>
+<br>
+<img width="599" height="337" alt="image" src="https://github.com/user-attachments/assets/ba8d11bf-7014-497a-8b7a-b7756e35ad57" />
+<br>
+<br>
 <h1>AI Declaration</h1>
 <br>
 <h2>No AI was used in the making of this project, though I won't disagree with the fact that I approached AI or the internet when I needed to learn any feature or for some help in exporting. I also therby declare that I have used some assets from itch.io in this game and am really thankful to their crreators for letting me use them for free! Yay!</h2>
