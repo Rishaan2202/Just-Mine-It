@@ -14,8 +14,8 @@ size = Vector2(122, 108)
 script = ExtResource("1_jyhfs")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=173933651]
-position = Vector2(577.99994, 62.5)
-scale = Vector2(0.8635681, 0.97466666)
+position = Vector2(587.99994, 92.99998)
+scale = Vector2(1.7961019, 0.8933333)
 texture = ExtResource("2_tbgi4")
 
 [node name="TileMapLayer2" parent="." unique_id=1194035583 instance=ExtResource("1_sugp2")]
